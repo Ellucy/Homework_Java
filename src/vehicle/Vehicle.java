@@ -15,6 +15,14 @@ public class Vehicle {
         this.fuelUsage = passengers == 0 ? fuelUsage : (float) (fuelUsage + fuelUsage * (0.05 * passengers));
     }
 
+    public float getFuel() {
+        return fuel;
+    }
+
+    public float getFuelUsage() {
+        return fuelUsage;
+    }
+
     public float maxDistance() {
         return (fuel / fuelUsage) * 100;
     }

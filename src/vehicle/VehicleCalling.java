@@ -16,9 +16,13 @@ public class VehicleCalling {
         float fuelUsage = scanner.nextFloat();
         System.out.print("Enter how many passengers will be in the vehicle: ");
         int passengers = scanner.nextInt();
+        System.out.print("Will you turn on air conditioner? (y/n): ");
+        char res = scanner.next().charAt(0);
 
-        Vehicle vehicle = new Vehicle(fuel, fuelUsage, passengers);
-        System.out.println("Your vehicle can drive maximum of " + decimalFormat.format(vehicle.maxDistance()) + " kilometers ");
+        boolean conditioner = res == 'y' ? true : false;
+
+        Car car = new Car(fuel, fuelUsage, passengers, conditioner);
+        System.out.println("Your car can drive maximum of " + decimalFormat.format(car.maxDistance()) + " kilometers ");
         scanner.close();
     }
 }
