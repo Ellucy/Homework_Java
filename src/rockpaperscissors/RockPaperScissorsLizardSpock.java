@@ -11,19 +11,22 @@ public class RockPaperScissorsLizardSpock {
         Scanner scanner = new Scanner(System.in);
 
         boolean letsContinue = true;
+        int userScore = 0;
+        int computerScore = 0;
 
         while (letsContinue) {
 
             //Get the input from user
 
             boolean isValid = true;
+
             String response = "";
             do {
                 System.out.print("Enter your choice (rock, paper, scissors, lizard, spock): ");
                 response = scanner.nextLine().toLowerCase().trim();
                 System.out.println("You chose: " + response);
 
-                if(!isValid(response)) {
+                if (!isValid(response)) {
                     System.out.println("Please enter correct choice (rock, paper, scissors, lizard, spock): ");
                 }
             } while (!isValid(response));
@@ -34,10 +37,18 @@ public class RockPaperScissorsLizardSpock {
             int randomIndex = random.nextInt(choices.length);
             String choiceOfComputer = choices[randomIndex];
             System.out.println("Computer chose: " + choiceOfComputer);
-            rockPaperScissors(response, choiceOfComputer);
+
+            String result = rockPaperScissors(response, choiceOfComputer);
+
+            if (result.equals("You")) {
+                userScore++;
+            } else if (result.equals("Computer")) {
+                computerScore++;
+            }
+
+            System.out.println("You: " + userScore + " - Computer: " + computerScore);
 
             char res;
-
             do {
                 System.out.println("Do You want to continue? (y/n): ");
                 res = scanner.nextLine().toLowerCase().charAt(0);
@@ -51,10 +62,11 @@ public class RockPaperScissorsLizardSpock {
         }
     }
 
-    private static void rockPaperScissors(String response, String choiceOfComputer) {
+    private static String rockPaperScissors(String response, String choiceOfComputer) {
 
         if (Objects.equals(response, choiceOfComputer)) {
             System.out.println("TIE");
+            return "TIE";
         } else if (
                 (response.equals("rock") && (choiceOfComputer.equals("scissors") || choiceOfComputer.equals("lizard"))) ||
                         (response.equals("paper") && (choiceOfComputer.equals("rock") || choiceOfComputer.equals("spock"))) ||
@@ -63,8 +75,10 @@ public class RockPaperScissorsLizardSpock {
                         (response.equals("spock") && (choiceOfComputer.equals("rock") || choiceOfComputer.equals("scissors")))
         ) {
             System.out.println("You win! Congrats 🎉");
+            return "You";
         } else {
             System.out.println("Computer wins! 🤖");
+            return "Computer";
         }
     }
 
